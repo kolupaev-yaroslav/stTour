@@ -190,18 +190,15 @@ tours = {
 
 app = Flask(__name__)
 def dep_name(departure):
-    if departure == 'msk':
-        departure_name = 'Москвы'
-    elif departure == 'spb':
-        departure_name = 'Питербурга'
-    elif departure == 'nsk':
-        departure_name = 'Новосибирска'
-    elif departure == 'ekb':
-        departure_name = 'Екатеринбурга'
-    elif departure == 'kazan':
-        departure_name = 'Казани'
+    list = {
+        'msk': 'Москвы',
+        'spb': 'Питербурга',
+        'nsk': 'Новосибирска',
+        'ekb': 'Екатеринбурга',
+        'kazan': 'Казани'
+    }
 
-    return departure_name
+    return list[departure]
 
 
 @app.route("/")
@@ -212,29 +209,22 @@ def home():
 def departure(departure):
     departure_name = dep_name(departure)
 
-    res = {}
+
+    res = []
     for key, value in tours.items():
         if value.get('departure') == departure:
-            res[key] = value
-
-    """
-    #это была попытка изменить структуру на более плоскую, тобы сделать min и max в шаблоне departure
-    Я пытался из res сделать массив, но не получилось прочитать это в шаблоне
-    
-                res.append({
-                    "id": key,
-                    "title": value['title'],
-                    "description": value['description'],
-                    "departure": value['departure'],
-                    "picture": value['picture'],
-                    "price": value['price'],
-                    "stars": value['stars'],
-                    "country": value['country'],
-                    "nights": value['nights'],
-                    "date": value['date']
-                })
-                print(res)
-    """
+            res.append({
+                "id": key,
+                "title": value['title'],
+                "description": value['description'],
+                "departure": value['departure'],
+                "picture": value['picture'],
+                "price": value['price'],
+                "stars": value['stars'],
+                "country": value['country'],
+                "nights": value['nights'],
+                "date": value['date']
+            })
 
     return render_template("departure.html", departure_name=departure_name, title=title, subtitle=subtitle, description=description, departures=departures, tours=res)
 

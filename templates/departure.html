@@ -3,17 +3,17 @@
 {% block main %}
   <main class="container mt-3">
     <h1 class="display-5 mt-4">Летим из {{ departure_name }}</h1>
-    <p class="mb-4">Найдено {{ tours|length }} туров, от {{ tours|min() }} до {{ tours|max() }} и от 4 ночей до 15 ночей</p>
+    <p class="mb-4">Найдено {{ tours|length }} туров, от min до max и от 4 ночей до 15 ночей</p>
     <!-- CARDS -->
     <div class="row mt-5">
-      {% for key, item in tours.items() %}
+      {% for item in tours %}
       <div class="col-4">
         <div class="card mb-4">
           <img src="{{ item.picture }}" class="card-img-top img-fluid" alt="">
           <div class="card-body">
             <h2 class="h5 card-title">{{ item.title }}</h2>
             <p class="card-text">{{ item.description }}</p>
-            <a href="/tours/{{ key }}" class="btn btn-sm btn-primary">Подробнее</a>
+            <a href="/tours/{{ item.key }}" class="btn btn-sm btn-primary">Подробнее</a>
           </div>
         </div>
       </div>
