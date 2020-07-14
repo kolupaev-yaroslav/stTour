@@ -225,7 +225,7 @@ def departure(departure):
                 "nights": value['nights'],
                 "date": value['date']
             })
-
+#111
     return render_template("departure.html", departure_name=departure_name, title=title, subtitle=subtitle, description=description, departures=departures, tours=res)
 
 @app.route("/tours/<int:id>/")
